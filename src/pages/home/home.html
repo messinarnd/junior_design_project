@@ -1,14 +1,71 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon item-left name="menu"></ion-icon>
+    </button>
     <ion-title>
-      Ionic Blank
+      Shaking Salt
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-toolbar>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="showBarcodeScanner()">
+        <ion-icon name="barcode"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-searchbar #mySearchbar (input)="search($event)" placeholder="Search for food item.."></ion-searchbar>
+  </ion-toolbar>
+
+  <ion-list no-lines>
+      <button ion-item *ngFor="let f of tempFoodItems" (click)="showFoodDetails(f)" (click)="addToRecentSearches(f)">
+        <ion-label text-left>{{f.name}}</ion-label>
+        <ion-label text-right [color]="f.lowSodium ? 'secondary' : 'danger'">{{f.sodiumPerServing}} mg</ion-label>
+      </button>
+      <button ion-item *ngIf="tempFoodItems.length == 0 && beingSearched">
+          <ion-label>No Results Found</ion-label>
+      </button>
+    </ion-list>
+
+  <ion-segment (ionChange)="segmentChanged($event)" value="recentlySearched" [(ngModel)]="myContent">
+    <ion-segment-button checked="true" value="recentlySearched">Recently Searched</ion-segment-button>
+    <ion-segment-button value="loggedItems">Logged Items</ion-segment-button>
+  </ion-segment>
+
+  <div>
+    <ion-list *ngIf="myContent == 'recentlySearched'">
+      <ion-item *ngFor="let f of recentlySearchedItems">
+        <ion-label text-left (click)="showFoodDetails(f)" (click)="addToRecentSearches(f)">{{f.name}}</ion-label>
+        <ion-label text-right [color]="f.lowSodium ? 'secondary' : 'danger'" (click)="showFoodDetails(f)" (click)="addToRecentSearches(f)">{{f.sodiumPerServing}} mg</ion-label>
+        <ion-icon item-right name="close" (click)="removeFromRecentlySearched(f)"></ion-icon>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="myContent == 'loggedItems'" class="accordion-list">
+      <ion-list-header *ngFor="let item of loggedWithDates; let i = index" no-lines no-padding>
+        <button ion-item detail-none (click)="toggleSection(i)">
+          <ion-icon item-left name="arrow-forward" *ngIf="!item.open"></ion-icon>
+          <ion-icon item-left name="arrow-down" *ngIf="item.open"></ion-icon>
+          {{loggedDates[i]}}
+          <!-- {{item[date][0].name}} -->
+        </button>
+
+        <!-- item.children might not be a thing for mine becasue that is how they have their's set up -->
+        <ion-list *ngIf="item.open" no-lines>
+          <ion-list-header *ngFor="let food of item[loggedDates[i]]; let j = index" no-padding>
+            <ion-label text-left (click)="showFoodDetails(food)" (click)="addToRecentSearches(food)">{{food.name}}</ion-label>
+            <ion-label text-right [color]="food.lowSodiumEaten ? 'secondary' : 'danger'" (click)="showFoodDetails(food)" (click)="addToRecentSearches(food)">{{food.sodiumEaten}} mg</ion-label>
+            <ion-icon item-right name="close" (click)="unlogItem(food)" (click)="toggleSection(i)"></ion-icon>
+          </ion-list-header>
+        </ion-list>
+      </ion-list-header>
+      <!-- <ion-item *ngFor="let f of loggedItems">
+        <ion-label text-left (click)="showFoodDetails(f)" (click)="addToRecentSearches(f)">{{f.name}}</ion-label>
+        <ion-label text-right [color]="f.lowSodiumEaten ? 'secondary' : 'danger'" (click)="showFoodDetails(f)" (click)="addToRecentSearches(f)">{{f.sodiumEaten}} mg</ion-label>
+        <ion-icon item-right name="close" (click)="unlogItem(f)"></ion-icon>
+      </ion-item> -->
+    </ion-list>
+  </div>
 </ion-content>

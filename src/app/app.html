@@ -1,1 +1,24 @@
+<ion-menu [content]="content">
+    <ion-content>
+        <div class="spacer" style="height: 10px;"></div>
+        <button ion-item>
+        Create Profile
+        </button>
+        <button ion-item>
+        Tutorials
+        </button>
+        <button ion-item>
+        Settings
+        </button>
+    </ion-content>
+
+    <ion-footer no-lines>
+        <button ion-button full color="danger">
+            Delete My Data
+        </button>
+    </ion-footer>
+</ion-menu>
+
+<ion-nav #content></ion-nav>
+
 <ion-nav [root]="rootPage"></ion-nav>
