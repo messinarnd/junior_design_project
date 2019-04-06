@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon item-left name="menu"></ion-icon>
     </button>
@@ -37,7 +37,7 @@
   <div>
     <ion-list *ngIf="myContent == 'recentlySearched'">
       <ion-item *ngFor="let f of recentlySearchedItems">
-        <ion-label text-left (click)="showFoodDetails(f)" (click)="addToRecentSearches(f)">{{f.name}}</ion-label>
+        <ion-label class="line-break" text-left (click)="showFoodDetails(f)" (click)="addToRecentSearches(f)">{{f.name}}</ion-label>
         <ion-label text-right [color]="f.lowSodium ? 'secondary' : 'danger'" (click)="showFoodDetails(f)" (click)="addToRecentSearches(f)">{{f.sodiumPerServing}} mg</ion-label>
         <ion-icon item-right name="close" (click)="removeFromRecentlySearched(f)"></ion-icon>
       </ion-item>
@@ -46,16 +46,17 @@
     <ion-list *ngIf="myContent == 'loggedItems'" class="accordion-list">
       <ion-list-header *ngFor="let item of loggedWithDates; let i = index" no-lines no-padding>
         <button ion-item detail-none (click)="toggleSection(i)">
-          <ion-icon item-left name="arrow-forward" *ngIf="!item.open"></ion-icon>
-          <ion-icon item-left name="arrow-down" *ngIf="item.open"></ion-icon>
-          {{loggedDates[i]}}
-          <!-- {{item[date][0].name}} -->
+          <ion-icon item-left name="arrow-dropright" *ngIf="!item.open"></ion-icon>
+          <ion-icon item-left name="arrow-dropdown" *ngIf="item.open"></ion-icon>
+          <h2 ion-text>
+          {{loggedDates[i]}}: <span ion-text [color]="overLimit[i] ? 'danger' : 'secondary'">{{loggedTotals[i]}} mg</span>
+          </h2>
         </button>
 
         <!-- item.children might not be a thing for mine becasue that is how they have their's set up -->
         <ion-list *ngIf="item.open" no-lines>
           <ion-list-header *ngFor="let food of item[loggedDates[i]]; let j = index" no-padding>
-            <ion-label text-left (click)="showFoodDetails(food)" (click)="addToRecentSearches(food)">{{food.name}}</ion-label>
+            <ion-label class="line-break" text-left (click)="showFoodDetails(food)" (click)="addToRecentSearches(food)">{{food.name}}</ion-label>
             <ion-label text-right [color]="food.lowSodiumEaten ? 'secondary' : 'danger'" (click)="showFoodDetails(food)" (click)="addToRecentSearches(food)">{{food.sodiumEaten}} mg</ion-label>
             <ion-icon item-right name="close" (click)="unlogItem(food)" (click)="toggleSection(i)"></ion-icon>
           </ion-list-header>

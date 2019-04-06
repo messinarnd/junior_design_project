@@ -26,6 +26,8 @@ export class HomePage {
   loggedItems = [];
   loggedWithDates = [];
   loggedDates = [];
+  loggedTotals = [];
+  overLimit = [];
 
   myContent = "recentlySearched";
 
@@ -120,6 +122,7 @@ export class HomePage {
       this.loggedWithDates = [];
       var count = 0;
       this.loggedDates = [];
+      this.loggedTotals = [];
 
       for (var i = 0; i < myData.length; i++) {
         var time = new Date(myData[i].timestamp)
@@ -130,6 +133,13 @@ export class HomePage {
             count++;
           }
           this.loggedWithDates.push({[date]: [myData[i]]});
+          this.loggedTotals.push(myData[i].sodiumEaten);
+          var total = parseInt(this.loggedTotals[count]) + parseInt(myData[i].sodiumEaten);
+          if (total > 2300) {
+            this.overLimit[count] = true;
+          } else {
+            this.overLimit[count] = false;
+          }
           console.log(this.loggedWithDates);
         } else {
           console.log(this.loggedWithDates[count]);
@@ -137,6 +147,13 @@ export class HomePage {
           console.log(this.loggedWithDates[count][date]);
           
           this.loggedWithDates[count][date].push(myData[i]);
+          var total = parseInt(this.loggedTotals[count]) + parseInt(myData[i].sodiumEaten);
+          this.loggedTotals[count] = (total).toString();
+          if (total > 2300) {
+            this.overLimit[count] = true;
+          } else {
+            this.overLimit[count] = false;
+          }
         }
       }
       console.log(this.loggedWithDates);

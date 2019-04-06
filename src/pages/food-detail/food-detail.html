@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>{{myFood.name}}</ion-title>
   </ion-navbar>
 </ion-header>
@@ -18,6 +18,10 @@
 
   <div>
     <ion-list *ngIf="myContent == 'details'">
+        <ion-row style="height: 0px"></ion-row>
+      <h2>
+        Log Item:
+      </h2>
       <ion-item>
         <!-- need to make amount eaten darker -->
           <ion-label color="dark">Amount Eaten:</ion-label>
@@ -37,9 +41,10 @@
         Log
       </button>
 
+      <ion-row style="height: 10px"></ion-row>
 
       <h2>
-        Nutrition Information
+        Nutrition Information:
       </h2>
       <ion-item>
         <ion-label>Serving Size:</ion-label>
