@@ -130,22 +130,20 @@ export class HomePage {
         if (this.loggedDates.indexOf(date) < 0) {
           this.loggedDates.push(date);
           if (count != 0) {
+            // this is different from i becasue it is only incremented if it is a new date
             count++;
           }
+
           this.loggedWithDates.push({[date]: [myData[i]]});
           this.loggedTotals.push(myData[i].sodiumEaten);
-          var total = parseInt(this.loggedTotals[count]) + parseInt(myData[i].sodiumEaten);
+          var total = parseInt(this.loggedTotals[count]);
+          
           if (total > 2300) {
             this.overLimit[count] = true;
           } else {
             this.overLimit[count] = false;
           }
-          console.log(this.loggedWithDates);
         } else {
-          console.log(this.loggedWithDates[count]);
-          console.log(Object.keys(this.loggedWithDates[count]));
-          console.log(this.loggedWithDates[count][date]);
-          
           this.loggedWithDates[count][date].push(myData[i]);
           var total = parseInt(this.loggedTotals[count]) + parseInt(myData[i].sodiumEaten);
           this.loggedTotals[count] = (total).toString();
@@ -174,8 +172,6 @@ export class HomePage {
     console.log("toggling: ", i);
     
     this.loggedWithDates[i].open = !this.loggedWithDates[i].open;
-    console.log(this.loggedWithDates[i].open);
-    
   }
 
 }

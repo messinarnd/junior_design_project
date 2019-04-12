@@ -18,21 +18,27 @@ export class FoodItemsProvider {
     sodiumEaten: '',
     caloriesPerServing: '60',
     caloriesWhole: '150',
-    lowSodium: false,
-    lowSodiumEaten: false,
+    sodiumQualifier: 'high',
+    sodiumEatenQualifier: 'low',
+    dailySodiumValue: 39,
+    dailySodiumEatenValue: 0,
+    servingsEaten: 0,
     timestamp: null
   }
 
   food2: FoodItem = {
     name: 'Health Valley Organic No Salt Added Chicken Noodle Soup',
     servingSize: '1 cup',
-    sodiumPerServing: '130',
+    sodiumPerServing: '110',
     sodiumWhole: '220',
     sodiumEaten: '',
     caloriesPerServing: '80',
     caloriesWhole: '140',
-    lowSodium: true,
-    lowSodiumEaten: false,
+    sodiumQualifier: 'low',
+    sodiumEatenQualifier: 'low',
+    dailySodiumValue: 5,
+    dailySodiumEatenValue: 0,
+    servingsEaten: 0,
     timestamp: null
   }
 
@@ -44,8 +50,11 @@ export class FoodItemsProvider {
     sodiumEaten: '',
     caloriesPerServing: '160',
     caloriesWhole: '320',
-    lowSodium: true,
-    lowSodiumEaten: false,
+    sodiumQualifier: 'normal',
+    sodiumEatenQualifier: 'low',
+    dailySodiumValue: 14,
+    dailySodiumEatenValue: 0,
+    servingsEaten: 0,
     timestamp: null
   }
 
@@ -57,8 +66,11 @@ export class FoodItemsProvider {
     sodiumEaten: '',
     caloriesPerServing: '60',
     caloriesWhole: '60',
-    lowSodium: false,
-    lowSodiumEaten: false,
+    sodiumQualifier: 'normal',
+    sodiumEatenQualifier: 'low',
+    dailySodiumValue: 10,
+    dailySodiumEatenValue: 0,
+    servingsEaten: 0,
     timestamp: null
   }
 
@@ -70,8 +82,11 @@ export class FoodItemsProvider {
     sodiumEaten: '',
     caloriesPerServing: '140',
     caloriesWhole: '2800',
-    lowSodium: true,
-    lowSodiumEaten: false,
+    sodiumQualifier: 'normal',
+    sodiumEatenQualifier: 'low',
+    dailySodiumValue: 11,
+    dailySodiumEatenValue: 0,
+    servingsEaten: 0,
     timestamp: null
   }
 
@@ -83,8 +98,11 @@ export class FoodItemsProvider {
     sodiumEaten: '',
     caloriesPerServing: '80',
     caloriesWhole: 'varied',
-    lowSodium: false,
-    lowSodiumEaten: false,
+    sodiumQualifier: 'normal',
+    sodiumEatenQualifier: 'low',
+    dailySodiumValue: 19,
+    dailySodiumEatenValue: 0,
+    servingsEaten: 0,
     timestamp: null
   }
 
@@ -96,3 +114,5 @@ export class FoodItemsProvider {
   }
 
 }
+// <=115: low
+// >=460: high

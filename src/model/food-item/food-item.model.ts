@@ -6,7 +6,10 @@ export interface FoodItem {
     sodiumEaten: string;
     caloriesPerServing: string;
     caloriesWhole: string;
-    lowSodium: boolean;
-    lowSodiumEaten: boolean;
+    sodiumQualifier: string;
+    sodiumEatenQualifier: string;
+    dailySodiumValue: number;
+    dailySodiumEatenValue: number;
+    servingsEaten: number;
     timestamp: string;
 }

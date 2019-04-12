@@ -63,9 +63,12 @@
     </ion-list>
 
     <ion-list *ngIf="myContent == 'alternatives'">
-      <button ion-item *ngFor="let f of alternativeFoods" (click)="showFoodDetails(f)">
+      <button ion-item *ngFor="let f of alternativeFoods" (click)="showFoodDetails(f)" (click)="addToRecentSearches(f)">
         <ion-label text-left>{{f.name}}</ion-label>
-        <ion-label text-right [color]="f.lowSodium ? 'secondary' : 'danger'">{{f.sodiumPerServing}} mg</ion-label>
+        <!-- <ion-label text-right [color]="f.lowSodium ? 'secondary' : 'danger'">{{f.sodiumPerServing}} mg</ion-label> -->
+        <ion-label *ngIf="f.sodiumQualifier == 'low'" text-right color="secondary">{{f.sodiumPerServing}} mg ({{f.dailySodiumValue}}%)</ion-label>
+        <ion-label *ngIf="f.sodiumQualifier == 'normal'" text-right color="orange">{{f.sodiumPerServing}} mg ({{f.dailySodiumValue}}%)</ion-label>
+        <ion-label *ngIf="f.sodiumQualifier == 'high'" text-right color="danger">{{f.sodiumPerServing}} mg ({{f.dailySodiumValue}}%)</ion-label>
       </button>
     </ion-list>
   </div>
